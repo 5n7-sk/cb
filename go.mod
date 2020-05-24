@@ -4,6 +4,7 @@ go 1.13
 
 require (
 	github.com/bitly/go-simplejson v0.5.0
+	github.com/jessevdk/go-flags v1.4.0
 	github.com/kyokomi/emoji v2.2.2+incompatible
 	github.com/lithammer/fuzzysearch v1.1.0
 	github.com/manifoldco/promptui v0.7.0

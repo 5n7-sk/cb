@@ -1,18 +1,42 @@
 package main
 
 import (
+	"fmt"
 	"log"
+	"os"
 	"strings"
 
+	"github.com/jessevdk/go-flags"
 	"github.com/kyokomi/emoji"
 	"github.com/lithammer/fuzzysearch/fuzzy"
 	"github.com/manifoldco/promptui"
 	"github.com/pkg/browser"
 )
 
+// These variables are set in build step
+var (
+	Version = "unset"
+)
+
+// Option represents application options
+type Option struct {
+	Version bool `short:"v" long:"version" description:"Show cb version"`
+}
+
 var bookmarkTypes = []string{"bookmark_bar", "other", "synced"}
 
-func main() {
+func run(args []string) error {
+	var opt Option
+	args, err := flags.ParseArgs(&opt, args)
+	if err != nil {
+		return err
+	}
+
+	if opt.Version {
+		fmt.Printf("cb v%s\n", Version)
+		return nil
+	}
+
 	b := Bookmarker{}
 	json := b.NewJSON()
 	roots := json.Get("roots")
@@ -64,8 +88,16 @@ func main() {
 
 	i, _, err := prompt.Run()
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	browser.OpenURL(b.Bookmarks[i].URL)
+
+	return nil
+}
+
+func main() {
+	if err := run(os.Args[1:]); err != nil {
+		log.Fatal(err)
+	}
 }
