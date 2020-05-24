@@ -2,8 +2,6 @@ package main
 
 import (
 	"log"
-	"os"
-	"path"
 	"strings"
 
 	"github.com/kyokomi/emoji"
@@ -15,16 +13,8 @@ import (
 var bookmarkTypes = []string{"bookmark_bar", "other", "synced"}
 
 func main() {
-	p := func() string {
-		home, err := os.UserHomeDir()
-		if err != nil {
-			log.Fatal(err)
-		}
-		return path.Join(home, ".config/google-chrome/Default/Bookmarks")
-	}()
-
 	b := Bookmarker{}
-	json := b.NewJSON(p)
+	json := b.NewJSON()
 	roots := json.Get("roots")
 
 	for _, bmType := range bookmarkTypes {

@@ -5,6 +5,9 @@ import (
 	"io/ioutil"
 	"log"
 	"math"
+	"os"
+	"path"
+	"runtime"
 	"strconv"
 	"time"
 
@@ -16,6 +19,26 @@ type Bookmarker struct {
 	Bookmarks []Bookmark
 }
 
+func (b Bookmarker) bookmarkPath() string {
+	var p string
+
+	home, err := os.UserConfigDir()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	switch o := runtime.GOOS; o {
+	case "darwin":
+		p = path.Join(home, "Google/Chrome/Default/Bookmarks")
+	case "linux":
+		p = path.Join(home, "google-chrome/Default/Bookmarks")
+	default:
+		log.Fatalf("%s is not suppoorted", o)
+	}
+
+	return p
+}
+
 func (b Bookmarker) interface2json(x interface{}) *simplejson.Json {
 	j := simplejson.New()
 	j.SetPath([]string(nil), x)
@@ -23,8 +46,8 @@ func (b Bookmarker) interface2json(x interface{}) *simplejson.Json {
 }
 
 // NewJSON returns a new simplejson.Json object
-func (b Bookmarker) NewJSON(path string) *simplejson.Json {
-	bytes, err := ioutil.ReadFile(path)
+func (b Bookmarker) NewJSON() *simplejson.Json {
+	bytes, err := ioutil.ReadFile(b.bookmarkPath())
 	if err != nil {
 		log.Fatal(err)
 	}
