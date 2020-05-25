@@ -11,6 +11,12 @@
       alt="build"
     />
   </a>
+  <a href="https://github.com/skmatz/cb/actions?query=workflow%3Arelease">
+    <img
+      src="https://github.com/skmatz/cb/workflows/release/badge.svg"
+      alt="release"
+    />
+  </a>
   <a href="./LICENSE">
     <img
       src="https://img.shields.io/github/license/skmatz/cb"
@@ -21,6 +27,12 @@
     <img
       src="https://img.shields.io/github/go-mod/go-version/skmatz/cb"
       alt="go version"
+    />
+  </a>
+  <a href="https://github.com/skmatz/cb/releases/latest">
+    <img
+      src="https://img.shields.io/github/v/release/skmatz/cb"
+      alt="release"
     />
   </a>
 </p>
@@ -35,3 +47,15 @@
 
 **cb** is an interactive CLI to open Chrome bookmarks from the terminal.  
 Just run `cb` and you can search for Chrome bookmarks and open in your browser.
+
+## Install
+
+### Binary
+
+Get binary from [releases](https://github.com/skmatz/cb/releases).
+
+### Source
+
+```sh
+go get github.com/skmatz/cb
+```
