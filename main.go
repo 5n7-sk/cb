@@ -7,7 +7,6 @@ import (
 	"strings"
 
 	"github.com/jessevdk/go-flags"
-	"github.com/kyokomi/emoji"
 	"github.com/lithammer/fuzzysearch/fuzzy"
 	"github.com/manifoldco/promptui"
 	"github.com/pkg/browser"
@@ -48,9 +47,9 @@ func run(args []string) error {
 
 	templates := &promptui.SelectTemplates{
 		Label:    "{{ . }}",
-		Active:   emoji.Sprint(":bookmark: {{ .Name | cyan }}"),
+		Active:   "\U0001F516  {{ .Name | cyan }}",
 		Inactive: "    {{ .Name | cyan }}",
-		Selected: emoji.Sprint(":bookmark: {{ .Name | cyan }}"),
+		Selected: "\U0001F516  {{ .Name | cyan }}",
 		Details: `------------------------------
 {{ "\U0001F4C5 added at" }}	{{ .DateAdded }}
 {{ "\U0001F4DD name" }}	{{ .Name }}
