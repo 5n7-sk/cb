@@ -22,16 +22,16 @@ type Bookmarker struct {
 func (b Bookmarker) bookmarkPath() string {
 	var p string
 
-	home, err := os.UserConfigDir()
+	conf, err := os.UserConfigDir()
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	switch o := runtime.GOOS; o {
 	case "darwin":
-		p = path.Join(home, "Google/Chrome/Default/Bookmarks")
+		p = path.Join(conf, "Google/Chrome/Default/Bookmarks")
 	case "linux":
-		p = path.Join(home, "google-chrome/Default/Bookmarks")
+		p = path.Join(conf, "google-chrome/Default/Bookmarks")
 	default:
 		log.Fatalf("%s is not suppoorted", o)
 	}
