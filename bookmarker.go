@@ -7,6 +7,7 @@ import (
 	"math"
 	"os"
 	"path"
+	"path/filepath"
 	"runtime"
 	"strconv"
 	"time"
@@ -22,16 +23,18 @@ type Bookmarker struct {
 func (b Bookmarker) bookmarkPath() string {
 	var p string
 
-	conf, err := os.UserConfigDir()
+	home, err := os.UserHomeDir()
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	switch o := runtime.GOOS; o {
 	case "darwin":
-		p = path.Join(conf, "Google/Chrome/Default/Bookmarks")
+		p = path.Join(home, "Library/Application Support/Google/Chrome/Default/Bookmarks")
 	case "linux":
-		p = path.Join(conf, "google-chrome/Default/Bookmarks")
+		p = path.Join(home, ".config/google-chrome/Default/Bookmarks")
+	case "windows":
+		p = filepath.FromSlash(path.Join(home, "AppData/Local/Google/Chrome/User Data/Default/Bookmarks"))
 	default:
 		log.Fatalf("%s is not suppoorted", o)
 	}
