@@ -48,6 +48,11 @@
 **cb** is an interactive CLI to open Chrome bookmarks from the terminal.  
 Just run `cb` and you can search for Chrome bookmarks and open in your browser.
 
+## Usage
+
+Basically you just run the command.  
+Note that Windows users cannot use arrow keys to move due to [this issue](https://github.com/manifoldco/promptui/issues/49), so type "?" to switch the search mode and use "j" or "k" keys like Vim to move up or down.
+
 ## Install
 
 ### Binary
