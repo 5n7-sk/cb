@@ -57,7 +57,12 @@ Note that Windows users cannot use arrow keys to move due to [this issue](https:
 
 ### Binary
 
-Get binary from [releases](https://github.com/skmatz/cb/releases).
+Get binary from [releases](https://github.com/skmatz/cb/releases).  
+If you already have [jq](https://github.com/stedolan/jq) and [fzf](https://github.com/junegunn/fzf) or [peco](https://github.com/peco/peco), you can download binary by running the following command.
+
+```sh
+curl -Ls https://api.github.com/repos/skmatz/cb/releases/latest | jq -r ".assets[].browser_download_url" | fzf | wget -i -
+```
 
 ### Source
 
