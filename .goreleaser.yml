@@ -28,9 +28,7 @@ archives:
       darwin: darwin
       linux: linux
       windows: windows
-    format_overrides:
-      - goos: windows
-        format: zip
+    format: binary
 
 release:
   prerelease: auto
